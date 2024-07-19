@@ -13,13 +13,13 @@ firebase_admin.initialize_app(cred, {
 @app.route('/add_data', methods=['POST'])
 def add_data():
     data = request.json
-    ref = db.reference('/data')
+    ref = db.reference('/')
     new_ref = ref.push(data)
     return jsonify({'id': new_ref.key}), 201
 
-@app.route('/get_data/<string:data_id>', methods=['GET'])
+@app.route('/get_data', methods=['GET'])
 def get_data(data_id):
-    ref = db.reference(f'/data/{data_id}')
+    ref = db.reference(f'/')
     data = ref.get()
     if data:
         return jsonify(data), 200
